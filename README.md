@@ -1,4 +1,4 @@
-PKeyRing
+AiryKey
 ========
 
 A web-based personal keyring.
