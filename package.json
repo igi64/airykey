@@ -1,0 +1,14 @@
+{
+    "name": "AiryKey",
+    "description": "IBP AiryKey",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": ">= 3.0.3",
+        "ejs": "*",
+        "node-random": ">= 0.0.3"
+    }
+}

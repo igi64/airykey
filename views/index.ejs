@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IBP AiryKey</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="keywords" content="Cloud Computing, Identity-Based Privacy, IBP, IBP Key Generator, SaaS, SecaaS, Security, Privacy, OpenID, OAuth, Identity-Based Encryption" />
+	<meta name="description" content="Identity-Based Privacy Key Generator.">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<!-- Google API --> <!-- it must be at first position -->
+	<script src="https://apis.google.com/js/client.js"></script>
+	<!-- jQuery -->
+	<script type="text/javascript" src="/javascripts/jquery/jquery-1.8.3.min.js"></script>
+	<!-- AiryKey API -->
+	<script type="text/javascript" src="/javascripts/oauth/oauth-api.js"></script>
+	<!-- https://github.com/umbrae/jsonlintdotcom -->
+	<script type="text/javascript" src="/javascripts/jsonlint/jsl.parser.js"></script>
+	<script type="text/javascript" src="/javascripts/jsonlint/jsl.format.js"></script>
+	<script type="text/javascript" src="/javascripts/jsonlint/jsl.interactions.js"></script>
+</head>
+<body>
+<div id="container">
+	<img src="/images/logo.png" alt="IBP Key Generator" style="margin: 0px auto" />
+	<h1>Identity-Based Privacy Key Generator</h1>
+    <p>
+        Encryption is one of the most effective data protection techniques.
+        For encryption to be useful, encryption keys must be properly managed and protected.
+        Identity-based data protection uses as a public key some unique information about the identity (e.g. a domain name or email address).
+        Cloud Computing customer can easily encrypt data with key based on his email address before moving it to a public cloud.
+        Access to encryption key generator is based on Open Authorization protocol.
+        Encryption key provider must be Trusted Authority.
+    </p>
+    <h1>Demo</h1>
+	<p>
+		There is a powerful API illustrated on this demo:
+	</p>
+	<p>
+		<ol>
+			<li>
+				<p>
+					Select Google scope and API:
+					<input type="radio" name="authApi" id="authApiUserInfo" value="userinfo" checked="checked">userinfo.email</input>
+					<input type="radio" name="authApi" id="authApiDriveAbout" value="driveabout">drive.metadata.readonly (PermissionId@drive.google.com)</input>
+				</p>
+				<!--p>
+					You can select 'https://www.googleapis.com/auth/userinfo.email' scope and 'https://www.googleapis.com/oauth2/v2/userinfo' API or
+					'https://www.googleapis.com/auth/drive.metadata.readonly' scope and 'https://www.googleapis.com/drive/v2/about' API.
+				</p-->
+			</li>
+			<li>
+				<% if (!user) { %>
+				<p>
+					your identity: <a href="javascript:void(0);" name= "authButtonEnc" id="authButtonEnc">Authenticate with Google</a>.
+				</p>
+				<input type="text" size="115" name="authIdentityEnc" id="authIdentityEnc" readonly="readonly" />
+				<% } else { %>
+				<p>
+					your identity: <a href="javascript:void(0);" name= "authButtonEnc" id="authButtonEnc">Sign out</a>.
+				</p>
+				<input type="text" size="115" name="authIdentityEnc" id="authIdentityEnc" readonly="readonly" value="<%= user %>" />
+				<% } %>
+			</li>
+			<li>
+				<p>
+					(optional) enter other email addresses separated by spaces.
+				</p>
+				<input type="text" size="115" name="otherIdentities" id="otherIdentities" />
+			</li>
+			<li>
+				<p>
+					<button type="button" name="encryptKeys" id="encryptKeys">Generate key</button>
+					(generates 128 bits iv, 256 bits plain key and identity-based encrypted key)
+				</p>
+			</li>
+			<li>
+				<p>
+					JSON output.
+					<button type="button" name="formatEncOut" id="formatEncOut" class="formatButton">format</button>
+				</p>
+				<textarea name="jsonOutputEnc" id="jsonOutputEnc" rows="15" cols="87" spellcheck="false" readonly="readonly" ></textarea>
+			</li>
+		</ol>
+		<p>
+			Now you can use iv and plain key for your 256 bits AES data encryption.
+			Throw away plain key after encryption! You do not need it anymore.
+			Attach Identity-Based encrypted key to encrypted data as metadata.
+		</p>
+		<p>
+			To decrypt your data, extract Identity-Based encrypted key (metadata) from data and use it as a JSON input.
+		</p>
+		<ol start="6">
+			<li>
+				<p>
+					JSON input.
+					<button type="button" name="copyKeysFromAbove" id="copyKeysFromAbove">Copy keys from above</button>
+					<button type="button" name="formatDecIn" id="formatDecIn" class="formatButton">format</button>
+				</p>
+				<textarea name="jsonInputDec" id="jsonInputDec" rows="15" cols="87" spellcheck="false" ></textarea>
+			</li>
+			<% if (!user) { %>
+			<p>
+				your identity: <a href="javascript:void(0);" name= "authButtonDec" id="authButtonDec">Authenticate with Google</a>.
+			</p>
+			<input type="text" size="115" name="authIdentityDec" id="authIdentityDec" readonly="readonly" />
+			<% } else { %>
+			<p>
+				your identity: <a href="javascript:void(0);" name="authButtonDec" id="authButtonDec">Sign out</a>.
+			</p>
+			<input type="text" size="115" name="authIdentityDec" id="authIdentityDec" readonly="readonly" value="<%= user %>" />
+			<% } %>
+			<li>
+				<p>
+					<button type="button" name="decryptKeys" id="decryptKeys">Decrypt key</button>
+					(decrypts Identity-Based encrypted key)
+				</p>
+			</li>
+			<li>
+				<p>
+					JSON output.
+					<button type="button" name="formatDecOut" id="formatDecOut" class="formatButton">format</button>
+				</p>
+				<textarea name="jsonOutputDec" id="jsonOutputDec" rows="7" cols="87" spellcheck="false" readonly="readonly" ></textarea>
+			</li>
+		</ol>
+		<p>
+			Now you have your plain key and you can decrypt your data.
+		</p>
+		<p>
+			This technology will be used in open sourced Cloud Data Storage System <a href="https://airybox.org">AiryBox</a>.
+		</p>
+	</p>
+	<div id="copyright">
+		Copyright &copy; 2011-2013 <a href="http://igi64.github.io/">Igor Zboran</a>
+	</div>
+</div>
+</body>
+</html>

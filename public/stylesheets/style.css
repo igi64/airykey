@@ -1,0 +1,66 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #f1f0ec;
+    margin: 0px;
+}
+
+#container {
+    background-color: #FFFFFF;
+    color: #000000;
+    width: 800px;
+    margin: 5px auto;
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+h1 {
+    font-size: 20px;
+    color: #a00101;
+    background-color: #FFFFFF;
+}
+
+p {
+    margin: 5px;
+}
+
+label {
+    width: 150px;
+    display: block;
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#copyright {
+    margin-top: 30px;
+    font-size: 10px;
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin: 0px auto;
+    border: 0px;
+}
+
+input textarea {
+    margin-bottom: 10px;
+}
+
+#authIdentityEnc, #authIdentityDec {
+    background-color: #ebebeb;
+}
+
+#jsonOutputEnc, #jsonOutputDec {
+    background-color: #ebebeb;
+}
+
+.formatButton {
+    border: 1px solid #3b007a;
+    background: #ffffff;
+}
+
+.formatButton:hover {
+    border: 1px solid #f00;
+    background: #eef;
+}
